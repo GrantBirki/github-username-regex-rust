@@ -15,5 +15,6 @@ categories = []
 [features]
 
 [dependencies]
+regex = "1.9.5"
 
 [dev-dependencies]
