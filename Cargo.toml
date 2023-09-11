@@ -15,7 +15,9 @@ categories = []
 [features]
 
 [dependencies]
-regex = { version = "1.5.4", path = "vendor/regex"}
+regex = "1.9.5"
+
 
 [dev-dependencies]
 clippy = "0.0.302"
+rustfmt = "0.10.0"
