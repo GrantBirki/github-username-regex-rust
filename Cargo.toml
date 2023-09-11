@@ -18,3 +18,4 @@ categories = []
 regex = "1.9.5"
 
 [dev-dependencies]
+clippy = "0.0.302"
