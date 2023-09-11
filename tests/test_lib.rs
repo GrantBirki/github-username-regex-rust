@@ -6,7 +6,7 @@ mod tests {
 
     const VALID_MSG: &str = "the provided handle should be valid";
     const INVALID_MSG: &str = "the provided handle should be invalid";
-    
+
     #[test]
     fn handle_is_valid() {
         assert!(valid("GrantBirki"), "{VALID_MSG}");
@@ -33,7 +33,9 @@ mod tests {
     #[test]
     fn handle_is_invalid_due_to_length() {
         assert!(
-            !valid("testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttes"),
+            !valid(
+                "testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttes"
+            ),
             "{INVALID_MSG}"
         );
     }
