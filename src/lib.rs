@@ -13,7 +13,7 @@ use regex::RegexBuilder;
 /// assert_eq!(valid("monalisa"), true);
 /// ```
 pub fn valid(handle: &str) -> bool {
-    let handle_regex: regex::Regex = RegexBuilder::new(r"^[a-z\d][-a-z\d]*[a-z\d]$")
+    let handle_regex: regex::Regex = RegexBuilder::new(r"^[a-z\d](-?[a-z\d]){0,38}$")
         .case_insensitive(true)
         .build()
         .unwrap();
