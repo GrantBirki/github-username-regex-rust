@@ -22,7 +22,7 @@ cargo update
 
 # re-vendor all crates
 echo -e "${BLUE}running cargo vendor${OFF}"
-cargo vendor
+cargo vendor --respect-source-config --versioned-dirs
 
 # restore the .cargo/config file
 echo -e "◀️ ${BLUE}restoring the .cargo/config file${OFF}"
