@@ -25,8 +25,28 @@ github_username_regex = "X.X.X" # where X.X.X is the version you want to use
 
 ## Usage 💻
 
+Using this crate is very simple. You can use the `valid` function to check if a GitHub username is valid. This function returns a `bool` value.
+
+Here is an example:
+
 ```rust
-todo
+fn main() {
+    let handle = "monalisa";
+    let valid = github_username_regex::valid(&handle);
+    if valid {
+        println!("{} is a valid GitHub username", handle);
+    } else {
+        println!("{} is not a valid GitHub username", handle);
+    }
+}
+```
+
+Console output of the above code:
+
+```console
+$ cargo run
+...
+monalisa is a valid GitHub username
 ```
 
 ## Release 🚀
