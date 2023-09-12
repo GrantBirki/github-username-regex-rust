@@ -9,8 +9,8 @@ description = "A lightweight Rust crate to check if a GitHub username / handle i
 readme = "README.md"
 repository = "https://github.com/GrantBirki/github-username-regex-rust"
 
-keywords = []
-categories = []
+keywords = ["github", "username", "regex", "validation", ]
+categories = ["parsing"]
 
 [features]
 
