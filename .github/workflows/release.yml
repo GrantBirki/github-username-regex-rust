@@ -1,0 +1,58 @@
+name: release
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - Cargo.toml
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+
+      - name: rust-toolchain
+        uses: actions-rs/toolchain@b2417cde72dcf67f306c0ae8e0828a81bf0b189f # pin@v1.0.6
+        with:
+          toolchain: stable
+          override: true
+          components: rustfmt, clippy
+
+      - name: lint
+        run: |
+          cargo fmt --all -- --check
+          cargo clippy --all-targets --all-features -- -D warnings
+
+      - name: test
+        run: cargo test
+
+      - name: set CRATE_VERSION from Cargo.toml
+        run: echo "CRATE_VERSION=$(grep version Cargo.toml | cut -d'=' -f 2 | tr -d " \t\n\r")" >> $GITHUB_ENV
+
+      # do not release if tag already exists
+      - name: check release
+        id: check_release
+        run: |
+          if git rev-parse "v${{ env.CRATE_VERSION }}" >/dev/null 2>&1; then
+            echo "v${{ env.CRATE_VERSION }} already exists, skipping release"
+            echo "::set-output name=skip_release::true"
+          fi
+
+      - name: release
+        if: ${{ steps.check_release.outputs.skip_release != 'true' }}
+        uses: ncipollo/release-action@a2e71bdd4e7dab70ca26a852f29600c98b33153e # pin@v1.12.0
+        with:
+          tag: "v${{ env.CRATE_VERSION }}"
+          generateReleaseNotes: true
+
+      - name: publish crate
+        if: ${{ steps.check_release.outputs.skip_release != 'true' }}
+        uses: katyo/publish-crates@v2
