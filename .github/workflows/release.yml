@@ -35,7 +35,7 @@ jobs:
         run: cargo test
 
       - name: set CRATE_VERSION from Cargo.toml
-        run: echo "CRATE_VERSION=$(grep version Cargo.toml | cut -d'=' -f 2 | tr -d \"'\" | tr -d '\"' | tr -d ' \t\n\r')" >> $GITHUB_ENV
+        run: echo "CRATE_VERSION=$(grep -oP 'version\s*=\s*"\K[^"]+' Cargo.toml)" >> $GITHUB_ENV
 
       # do not release if tag already exists
       - name: check release
