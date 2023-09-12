@@ -58,3 +58,4 @@ jobs:
         uses: katyo/publish-crates@e83e72af4fbc5013e7fc275ad55828623e854858 # pin@v2
         with:
           registry-token: ${{ secrets.CARGO_REGISTRY_TOKEN }}
+          args: --registry crates-io
