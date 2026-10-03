@@ -11,6 +11,8 @@ on:
 permissions:
   contents: write
 
+cache-mode: none
+
 jobs:
   release:
     runs-on: ubuntu-latest
